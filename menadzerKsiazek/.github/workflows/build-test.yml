@@ -1,0 +1,63 @@
+name: Build and Test
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Pobranie repozytorium
+        uses: actions/checkout@v4
+
+      - name: Instalacja MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Budowanie projektu
+        run: msbuild menadzerKsiazek.slnx /p:Configuration=Debug /p:Platform=x64
+
+      - name: Uruchomienie testów
+        shell: pwsh
+        run: |
+          $vstest = Get-ChildItem `
+            "C:\Program Files\Microsoft Visual Studio\2022" `
+            -Recurse `
+            -Filter "vstest.console.exe" `
+            -ErrorAction SilentlyContinue |
+            Select-Object -First 1
+
+          if (-not $vstest) {
+            Write-Error "Nie znaleziono vstest.console.exe"
+            exit 1
+          }
+
+          $testDlls = Get-ChildItem `
+            -Path "${{ github.workspace }}" `
+            -Recurse `
+            -Filter "*Test*.dll" `
+            -ErrorAction SilentlyContinue |
+            Where-Object {
+              $_.FullName -like "*x64*Debug*" -or
+              $_.FullName -like "*Debug*"
+            }
+
+          if (-not $testDlls) {
+            Write-Error "Nie znaleziono pliku DLL z testami."
+            exit 1
+          }
+
+          foreach ($testDll in $testDlls) {
+            Write-Host "Uruchamianie testów: $($testDll.FullName)"
+
+            & $vstest.FullName `
+              $testDll.FullName `
+              /logger:"console;verbosity=normal"
+
+            if ($LASTEXITCODE -ne 0) {
+              exit $LASTEXITCODE
+            }
+          }

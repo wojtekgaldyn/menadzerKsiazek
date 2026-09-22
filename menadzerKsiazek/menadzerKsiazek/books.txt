@@ -1,0 +1,3 @@
+1|Ogniem i mieczem|Henryk Sienkiewicz|1884|
+2|Harry Potter i Kamien Filozoficzny|J.K. Rowling|1997|
+3|Wladca pierscieni Druzyna Pierscienia|J.R.R. Tolkien|1954|
