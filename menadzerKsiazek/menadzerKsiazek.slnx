@@ -4,4 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="menadzerKsiazek/menadzerKsiazek.vcxproj" />
+  <Project Path="TestyMenadzeraKsiazek/TestyMenadzeraKsiazek.vcxproj" />
 </Solution>
