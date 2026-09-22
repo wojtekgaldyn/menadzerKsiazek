@@ -11,6 +11,9 @@ public:
 	void dodajKsiazke(Ksiazka ksiazka);
 	void wyswietlKsiazki();
 	bool usunKsiazke(int id);
+
+	vector<Ksiazka>& pobierzKsiazki();
+	int pobierzNastepneId();
 };
 
 

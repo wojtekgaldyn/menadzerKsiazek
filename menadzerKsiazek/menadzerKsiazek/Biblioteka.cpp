@@ -32,3 +32,19 @@ void Biblioteka::wyswietlKsiazki() {
         }
     }
 }
+
+vector<Ksiazka>& Biblioteka::pobierzKsiazki()
+{
+    return ksiazki;
+}
+
+int Biblioteka::pobierzNastepneId() {
+    int najwyzszeId = 0;
+
+    for (Ksiazka& ksiazka : ksiazki) {
+        if (ksiazka.getId() > najwyzszeId) {
+            najwyzszeId = ksiazka.getId();
+        }
+    }
+    return najwyzszeId + 1;
+}
