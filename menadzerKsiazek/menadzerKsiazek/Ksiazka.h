@@ -14,5 +14,9 @@ private:
 public:
 	Ksiazka(int idKsiazki, string tytulKsiazki, string autorKsiazki, int rokWydaniaKsiazki);
 	void wyswietl();
+	int getId();
+	string getTytul();
+	string getAutor();
+	int getRokWydania();
 };
 

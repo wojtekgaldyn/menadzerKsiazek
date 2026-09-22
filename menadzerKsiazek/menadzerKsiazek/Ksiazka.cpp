@@ -16,3 +16,16 @@ void  Ksiazka::wyswietl() {
 	cout << "Autor: " << autor << "\n";
 	cout << "Rok wydania: " << rokWydania << "\n";
 };
+
+int Ksiazka::getId() {
+	return id;
+}
+string Ksiazka::getTytul(){
+	return tytul;
+}
+string Ksiazka::getAutor() {
+	return autor;
+}
+int Ksiazka::getRokWydania() {
+	return rokWydania;
+}

@@ -6,6 +6,20 @@ void Biblioteka::dodajKsiazke(Ksiazka ksiazka) {
 	ksiazki.push_back(ksiazka);
 }
 
+bool Biblioteka::usunKsiazke(int id)
+{
+    for (auto it = ksiazki.begin(); it != ksiazki.end(); ++it)
+    {
+        if (it->getId() == id)
+        {
+            ksiazki.erase(it);
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Biblioteka::wyswietlKsiazki() {
     if (ksiazki.empty()) {
         cout << "Brak ksiazek \n";
@@ -14,6 +28,7 @@ void Biblioteka::wyswietlKsiazki() {
         cout << "\n";
         for (Ksiazka& ksiazka : ksiazki) {
             ksiazka.wyswietl();
+            cout << "\n";
         }
     }
 }
